@@ -15,9 +15,11 @@ namespace MilleniumRecruitmentTask
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger _logger;
+        public Startup(IConfiguration configuration, ILoggerFactory logFactory)
         {
             Configuration = configuration;
+            _logger = logFactory.CreateLogger<Startup>();
         }
 
         public IConfiguration Configuration { get; }
@@ -46,6 +48,8 @@ namespace MilleniumRecruitmentTask
             {
                 s.SwaggerEndpoint("/swagger/v1/swagger.json", "Millenium Recruitment Task");
             });
+
+            _logger.LogInformation("Welcome in Millenium!");
         }
     }
 }
